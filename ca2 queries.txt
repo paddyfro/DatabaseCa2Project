@@ -1,0 +1,23 @@
+sql ca project
+
+login: mysql -u root -p
+
+
+CREATE DATABASE databaseProject;
+
+create table students (
+student_id int NOT NULL,
+firstName varchar(20) NOT NULL,
+lastName varchar(30) NOT NULL,
+address varchar(40) NOT NULL,
+phone varchar (20)NOT NULL,
+email varchar(40) NOT NULL,
+PRIMARY KEY (student_id));
+
+CREATE table studentCourses (
+grade int,
+Regstration_date date,
+PRIMARY KEY (student_id, course_id),
+FOREIGN KEY(student_id REFERENCES students(student_id),
+FOREIGN KEY(course_id REFERENCES courses(course_id)
+);
