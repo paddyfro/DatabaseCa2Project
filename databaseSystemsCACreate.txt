@@ -1,0 +1,144 @@
+
+
+DROP DATABASE IF EXISTS databaseProject;
+CREATE DATABASE databaseProject;
+use databaseProject;
+
+CREATE table building (
+building_id int AUTO_INCREMENT NOT NULL,
+address varchar(50) NOT NULL,
+room_num int NOT NULL,
+PRIMARY KEY(building_id));
+
+CREATE table department ( 
+department_id int NOT NULL AUTO_INCREMENT,
+building_id int NOT NULL,
+department_name varchar(30),
+PRIMARY KEY ( department_id ),
+FOREIGN KEY ( building_id) REFERENCES building(building_id));
+
+create table students (
+student_id int  NOT NULL AUTO_INCREMENT,
+firstName varchar(20) NOT NULL,
+lastName varchar(30) NOT NULL,
+birthDate date NOT NULL,
+address varchar(40) NOT NULL,
+phone varchar (20)NOT NULL,
+email varchar(40) NOT NULL,
+PRIMARY KEY (student_id));
+
+create table courses(
+course_id int AUTO_INCREMENT NOT NULL,
+department_id int NOT NULL,
+course_name varchar(30) NOT NULL,
+course_desc varchar(150) NOT NULL,
+course_size int NOT NULL,
+credits int NOT NULL,
+PRIMARY KEY (course_id),
+FOREIGN KEY(department_id) REFERENCES department(department_id));
+
+
+CREATE table studentCourses (
+student_id int NOT NULL,
+course_id int NOT NULL,
+grade int,
+Regstration_date date,
+PRIMARY KEY  (course_id, student_id),
+UNIQUE INDEX (student_id, course_id),
+FOREIGN KEY(student_id) REFERENCES students(student_id),
+FOREIGN KEY(course_id) REFERENCES courses(course_id)
+);
+
+create table staff (
+staff_id INT NOT NULL AUTO_INCREMENT,
+department_id int NOT NULL,
+firstName varchar(20) NOT NULL,
+lastName varchar(30) NOT NULL,
+phone varchar (20)NOT NULL,
+email varchar(40) NOT NULL,
+PRIMARY KEY (staff_id),
+FOREIGN KEY(department_id) REFERENCES department(department_id)
+);
+
+CREATE table staffCourses(
+staff_id int NOT NULL,
+course_id int NOT NULL,
+num_registered int NOT NULL,
+PRIMARY KEY(staff_id, course_id),
+UNIQUE INDEX(course_id, staff_id),
+FOREIGN KEY(staff_id) REFERENCES staff(staff_id),
+FOREIGN KEY(course_id) REFERENCES courses(course_id)
+);
+
+
+INSERT INTO `building` (`building_id`, `address`, `room_num`) VALUES (NULL, 'college road', '56');
+
+INSERT INTO `department` (`department_id`, `building_id`, `department_name`) VALUES (NULL, '1', 'Computing');
+INSERT INTO `department` (`department_id`, `building_id`, `department_name`) VALUES (NULL, '1', 'Multimedia');
+
+
+
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Patrick', 'McDonell', '1986-05-23', 'dundalk', '0125478541', 'patrick@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'David', 'Halpenny', '1985-01-04', 'Ardee, dundalk', '0145871241', 'david@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Stephen', 'Fagan', '1985-08-03', 'El Paso', '4587135421', 'stephen@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Mandy', 'Smith', '1988-11-19', 'Dundalk', '0785454572', 'mandy@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Brendan', 'McLaughlin', '1985-12-28', 'Belllurgan, Dundalk', '0125478541', 'brendan@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Emma', 'Quiley', '1990-10-27', 'BallyBay', '08712563214', 'emmak@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Linda', 'Curtis', '1986-03-23', 'Dublin', '8745126547', 'linda@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Aidan', 'Hamill', '1984-05-04', 'Backrock', '7854123652', 'aidan@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Lisa', 'Lawless', '1987-07-12', 'London', '4521365235', 'lisa@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Tracy', 'Tarant', '1986-05-03', 'Chicago', '0145874587', 'tracy@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Lauren', 'Torger', '1984-08-02', 'Chicago', '0145364787', 'lauren@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Jennifer', 'Fagan', '1985-05-03', 'Dundalk', '0145236521', 'jennifer@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Sharon', 'Whitford', '1989-11-11', 'Carlow', '7854125412', 'sharon@internet.com');
+INSERT INTO `students` (`student_id`, `firstName`, `lastName`, `birthDate`, `address`, `phone`, `email`) VALUES (NULL, 'Yvonne', 'Coyle', '1991-05-03', 'Dublin', '0214587465', 'yvonne@internet.com');
+
+
+INSERT INTO `staff` (`staff_id`, `department_id`, `firstName`, `lastName`, `phone`, `email`) VALUES (NULL, '1', 'Mick', 'Flannagan', '45612378954', 'mickf@internet.com');
+INSERT INTO `staff` (`staff_id`, `department_id`, `firstName`, `lastName`, `phone`, `email`) VALUES (NULL, '1', 'Tom', 'Hardy', '452123256', 'tom@internet.com');
+INSERT INTO `staff` (`staff_id`, `department_id`, `firstName`, `lastName`, `phone`, `email`) VALUES (NULL, '1', 'Steve', 'Rogers', '8008580085', 'stever@internet.com');
+INSERT INTO `staff` (`staff_id`, `department_id`, `firstName`, `lastName`, `phone`, `email`) VALUES (NULL, '1', 'Peter', 'Parker', '1236547854', 'peterp@internet.com');
+INSERT INTO `staff` (`staff_id`, `department_id`, `firstName`, `lastName`, `phone`, `email`) VALUES (NULL, '1', 'Logan', 'Howlett', '4587123654', 'loganh@internet.com');
+INSERT INTO `staff` (`staff_id`, `department_id`, `firstName`, `lastName`, `phone`, `email`) VALUES (NULL, '1', 'Charles', 'Xavier', '1236985478', 'charlesx@internet.com');
+INSERT INTO `staff` (`staff_id`, `department_id`, `firstName`, `lastName`, `phone`, `email`) VALUES (NULL, '1', 'Eric', 'Leshner', '6985478543', 'ericl@internet.com');
+
+INSERT INTO `courses` (`course_id`, `department_id`, `course_name`, `course_desc`, `course_size`, `credits`) VALUES (NULL, '1', 'Java', 'learn java the most wonderful of languages', '45', '10');
+INSERT INTO `courses` (`course_id`, `department_id`, `course_name`, `course_desc`, `course_size`, `credits`) VALUES (NULL, '1', 'php', 'learn php the most wonderful of languages, much better than java', '30', '5');
+INSERT INTO `courses` (`course_id`, `department_id`, `course_name`, `course_desc`, `course_size`, `credits`) VALUES (NULL, '1', 'Hardware', 'learn all about how your computer ticks', '60', '5');
+INSERT INTO `courses` (`course_id`, `department_id`, `course_name`, `course_desc`, `course_size`, `credits`) VALUES (NULL, '1', 'Databases', 'only the most interesting course going', '25', '5');
+INSERT INTO `courses` (`course_id`, `department_id`, `course_name`, `course_desc`, `course_size`, `credits`) VALUES (NULL, '1', 'WebProgramming', 'what was all that html stuff about again? learn it here!', '20', '10');
+
+
+INSERT INTO `staffcourses` (`staff_id`, `course_id`, `num_registered`) VALUES ('1', '1', '15');
+INSERT INTO `staffcourses` (`staff_id`, `course_id`, `num_registered`) VALUES ('5', '2', '30');
+INSERT INTO `staffcourses` (`staff_id`, `course_id`, `num_registered`) VALUES ('4', '4', '20');
+INSERT INTO `staffcourses` (`staff_id`, `course_id`, `num_registered`) VALUES ('2', '3', '40');
+INSERT INTO `staffcourses` (`staff_id`, `course_id`, `num_registered`) VALUES ('3', '5', '19');
+INSERT INTO `staffcourses` (`staff_id`, `course_id`, `num_registered`) VALUES ('7', '1', '19');
+INSERT INTO `staffcourses` (`staff_id`, `course_id`, `num_registered`) VALUES ('6', '2', '15');
+
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('1', '2', '98', '2017-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('1', '1', '78', '2017-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('1', '4', '92', '2017-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('4', '5', '85', '2017-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('2', '2', '78', '2016-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('3', '5', '25', '2015-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('6', '1', '56', '2017-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('9', '3', '45', '2016-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('9', '1', '69', '2017-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('12', '2', '70', '2016-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('10', '4', '12', '2017-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('13', '2', '98', '2017-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('14', '5', '45', '2016-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('11', '3', '69', '2017-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('8', '4', '78', '2015-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('5', '1', '56', '2016-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('5', '2', '48', '2016-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('7', '3', '73', '2017-09-01');
+INSERT INTO `studentcourses` (`student_id`, `course_id`, `grade`, `Regstration_date`) VALUES ('7', '4', '82', '2017-09-01');
+
+
+
+
+
+

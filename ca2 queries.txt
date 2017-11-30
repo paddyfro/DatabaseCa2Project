@@ -6,12 +6,13 @@ login: mysql -u root -p
 CREATE DATABASE databaseProject;
 
 create table students (
-student_id int NOT NULL,
+student_id int NOT NULL AUTO_INCREMENT,
 firstName varchar(20) NOT NULL,
 lastName varchar(30) NOT NULL,
 address varchar(40) NOT NULL,
 phone varchar (20)NOT NULL,
 email varchar(40) NOT NULL,
+birthDate date NOT NULL,
 PRIMARY KEY (student_id));
 
 CREATE table studentCourses (
@@ -21,3 +22,21 @@ PRIMARY KEY (student_id, course_id),
 FOREIGN KEY(student_id REFERENCES students(student_id),
 FOREIGN KEY(course_id REFERENCES courses(course_id)
 );
+
+create table staff (
+staff_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+firstName varchar(20) NOT NULL,
+lastName varchar(30) NOT NULL,
+phone varchar (20)NOT NULL,
+email varchar(40) NOT NULL,
+dept_id int NOT NULL
+PRIMARY KEY (staff_id));
+
+CREATE table staffCourses (
+num_registered int,
+PRIMARY KEY (staff_id, course_id),
+FOREIGN KEY(staff_id REFERENCES staff(staff_id),
+FOREIGN KEY(course_id REFERENCES courses(course_id)
+);
+
+
